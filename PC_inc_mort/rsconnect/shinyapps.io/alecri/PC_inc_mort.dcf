@@ -1,0 +1,12 @@
+name: PC_inc_mort
+title: PC_inc_mort
+username:
+account: alecri
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1548555
+bundleId: 2632697
+url: https://alecri.shinyapps.io/PC_inc_mort/
+when: 1575299348.46456
+asMultiple: FALSE
+asStatic: FALSE
