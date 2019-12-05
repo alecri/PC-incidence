@@ -1,4 +1,5 @@
 #devtools::install_github("thomasp85/transformr")
+#devtools::install_github("reinholdsson/swemaps")
 pacman::p_load(tidyverse, plotly, swemaps, ggthemes, gridExtra, gganimate, magick)
 theme_set(theme_bw())
 
@@ -113,8 +114,6 @@ p_map_mort <- filter(map_indices, Rate == "Mortality") %>%
   theme(legend.position = c(.9, .2)) +
   labs(title = "Mortality rate (x 100 000)") +
   scale_fill_gradientn(colours = heat.colors(n = 7, rev = T))
-grid.arrange(p_map_inc, p_map_mort, nrow = 1)
-
 
 # create a gif from the previous maps (note: it takes some time)
 gif_inc <- animate(p_map_inc +
@@ -122,15 +121,17 @@ gif_inc <- animate(p_map_inc +
                      labs(title = "Incidence rate (x 100 000), Year: {frame_time}"), 
                    nframes = 18, duration = 18, width = 300, height = 560)
 gif_inc
+image_write(gif_inc, path = "gif/gif_inc.gif")
 gif_mort <- animate(p_map_mort +
                       transition_time(Year) + 
                       labs(title = "Mortality rate (x 100 000), Year: {frame_time}"), 
                     nframes = 18, duration = 18, width = 300, height = 560)
 gif_mort
+image_write(gif_mort, path = "gif/gif_mort.gif")
 
 # putting the two previous gifs close to each other (in a grid 1x2)
-inc_mgif <- image_read(gif_inc)
-mort_mgif <- image_read(gif_mort)
+inc_mgif <- image_read(path = "gif/gif_inc.gif")
+mort_mgif <- image_read(path = "gif/gif_mort.gif")
 map_gif <- image_append(c(inc_mgif[1], mort_mgif[1]))
 for(i in 2:18){
   combined <- image_append(c(inc_mgif[i], mort_mgif[i]))
