@@ -39,7 +39,7 @@ p1_ind
 
 # incidence and mortality over time by regions
 filter(indices, `Age category` == "Totalt", 
-       Region %in% c("Sweden", "Stockholms län", "Skåne län", "Norrbottens län")) %>% 
+       Region %in% c("Sweden", "Stockholms län", "Skåne", "Norrbottens län")) %>% 
   ggplot(aes(Year, value, linetype = Rate, col = Region)) +
   geom_point() +
   geom_line() +
@@ -48,7 +48,7 @@ p2_ind
 
 # incidence and mortality over time by regions and age categories
 filter(indices, `Age category` %in% c("60-64", "65-69", "70-74", "Totalt"), 
-       Region %in% c("Sweden", "Stockholms län", "Skåne län", "Norrbottens län")) %>% 
+       Region %in% c("Sweden", "Stockholms län", "Skåne", "Norrbottens län")) %>% 
   ggplot(aes(Year, value, linetype = Rate, col = Region)) +
   geom_point() +
   geom_line() +
